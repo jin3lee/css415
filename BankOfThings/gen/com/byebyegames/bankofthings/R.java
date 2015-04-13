@@ -1886,7 +1886,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09003f;
         public static final int action_mode_bar_stub=0x7f09003e;
         public static final int action_mode_close_button=0x7f090031;
-        public static final int action_settings=0x7f090056;
+        public static final int action_settings=0x7f090057;
         public static final int activity_chooser_view_content=0x7f090032;
         public static final int alignBounds=0x7f09000b;
         public static final int alignMargins=0x7f09000c;
@@ -1953,6 +1953,7 @@ containing a value of this type.
         public static final int submit_area=0x7f09004d;
         public static final int tabMode=0x7f09001e;
         public static final int textView1=0x7f090055;
+        public static final int textView2=0x7f090056;
         public static final int title=0x7f090038;
         public static final int top=0x7f09001a;
         public static final int up=0x7f090001;
