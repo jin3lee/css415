@@ -4,8 +4,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,11 +27,23 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// leashes to textview that says "New to BankOfThings? Sign Up"
-		TextView textLink_signup = (TextView) findViewById(R.id.textView1);
-		textLink_signup.setTextColor(Color.parseColor("#0080FF"));
+		// sets background color to white
+		setActivityBackgroundColor(Color.WHITE);
 
-		// eashes to login button 
+		// leashes to textview that says "New to BankOfThings? Sign Up"
+		Button textLink_signup = (Button) findViewById(R.id.button2);
+		textLink_signup.setTextColor(Color.parseColor("#0080FF"));
+		textLink_signup.setBackgroundColor(Color.parseColor("WHITE"));
+		textLink_signup.setOnClickListener(new View.OnClickListener() 	// goes to signup website
+		{
+			@Override
+			public void onClick(View v) {
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://byebyegames.com/signup.html"));
+				startActivity(browserIntent);
+			}
+		});
+
+		// leashes to login button 
 		Button button_login = (Button) findViewById(R.id.button1);		// leash to specified xml button
 		button_login.setBackgroundColor(Color.parseColor("#00BFFF"));	// button color blue
 		button_login.setTextColor(Color.parseColor("WHITE"));			// text color white
@@ -78,5 +92,11 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	// changes background color of activity
+	public void setActivityBackgroundColor(int color) {
+		View view = this.getWindow().getDecorView();
+		view.setBackgroundColor(color);
 	}
 }

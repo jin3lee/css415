@@ -1894,6 +1894,7 @@ containing a value of this type.
         public static final int beginning=0x7f09002d;
         public static final int bottom=0x7f09000d;
         public static final int button1=0x7f090053;
+        public static final int button2=0x7f090055;
         public static final int center=0x7f09000e;
         public static final int center_horizontal=0x7f09000f;
         public static final int center_vertical=0x7f090010;
@@ -1952,7 +1953,6 @@ containing a value of this type.
         public static final int start=0x7f090019;
         public static final int submit_area=0x7f09004d;
         public static final int tabMode=0x7f09001e;
-        public static final int textView1=0x7f090055;
         public static final int textView2=0x7f090056;
         public static final int title=0x7f090038;
         public static final int top=0x7f09001a;
