@@ -1,12 +1,10 @@
 package com.byebyegames.bankofthings;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -69,6 +67,8 @@ public class MainActivity extends ActionBarActivity {
                 		+ "\n Your Password is: " + password);
                 
                 // TODO: access server, verify info, and switch to different activity
+                Intent i = new Intent(getApplicationContext(), SendActivity.class);
+                startActivity(i);
             }
         });
 	}

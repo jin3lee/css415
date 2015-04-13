@@ -1886,7 +1886,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09003f;
         public static final int action_mode_bar_stub=0x7f09003e;
         public static final int action_mode_close_button=0x7f090031;
-        public static final int action_settings=0x7f090057;
+        public static final int action_settings=0x7f09005d;
         public static final int activity_chooser_view_content=0x7f090032;
         public static final int alignBounds=0x7f09000b;
         public static final int alignMargins=0x7f09000c;
@@ -1907,6 +1907,7 @@ containing a value of this type.
         public static final int dialog=0x7f09002b;
         public static final int disableHome=0x7f09001f;
         public static final int dropdown=0x7f09002c;
+        public static final int editText0=0x7f090058;
         public static final int editText1=0x7f090050;
         public static final int editText2=0x7f090051;
         public static final int edit_query=0x7f090044;
@@ -1923,6 +1924,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f090028;
         public static final int image=0x7f090034;
         public static final int left=0x7f090017;
+        public static final int linearLayout1=0x7f090057;
         public static final int listMode=0x7f09001c;
         public static final int list_item=0x7f090036;
         public static final int middle=0x7f09002e;
@@ -1932,6 +1934,8 @@ containing a value of this type.
         public static final int progress_circular=0x7f090007;
         public static final int progress_horizontal=0x7f090008;
         public static final int radio=0x7f09003c;
+        public static final int radioButton1=0x7f09005b;
+        public static final int radioButton2=0x7f09005c;
         public static final int right=0x7f090018;
         public static final int search_badge=0x7f090046;
         public static final int search_bar=0x7f090045;
@@ -1949,10 +1953,12 @@ containing a value of this type.
         public static final int showTitle=0x7f090024;
         public static final int space1=0x7f090052;
         public static final int space2=0x7f090054;
+        public static final int space3=0x7f090059;
         public static final int split_action_bar=0x7f090004;
         public static final int start=0x7f090019;
         public static final int submit_area=0x7f09004d;
         public static final int tabMode=0x7f09001e;
+        public static final int textView1=0x7f09005a;
         public static final int textView2=0x7f090056;
         public static final int title=0x7f090038;
         public static final int top=0x7f09001a;
@@ -2014,11 +2020,15 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030013;
         public static final int abc_search_view=0x7f030014;
         public static final int abc_simple_dropdown_hint=0x7f030015;
-        public static final int activity_main=0x7f030016;
-        public static final int support_simple_spinner_dropdown_item=0x7f030017;
+        public static final int activity_history=0x7f030016;
+        public static final int activity_main=0x7f030017;
+        public static final int activity_send=0x7f030018;
+        public static final int support_simple_spinner_dropdown_item=0x7f030019;
     }
     public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int history=0x7f0c0000;
+        public static final int main=0x7f0c0001;
+        public static final int send=0x7f0c0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -2084,6 +2094,8 @@ containing a value of this type.
         public static final int login=0x7f0a0015;
         public static final int password=0x7f0a0014;
         public static final int signup=0x7f0a0016;
+        public static final int title_activity_history=0x7f0a0017;
+        public static final int title_activity_send=0x7f0a0018;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0b00cf;

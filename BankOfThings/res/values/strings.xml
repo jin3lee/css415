@@ -8,5 +8,7 @@
     <string name="password">Password</string>
     <string name="login">Log In</string>
     <string name="signup">New to BankOfThings? Sign Up</string>
+    <string name="title_activity_history">History</string>
+    <string name="title_activity_send">Send</string>
 
 </resources>
