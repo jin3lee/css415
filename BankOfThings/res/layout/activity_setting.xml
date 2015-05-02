@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.byebyegames.bankofthings.SettingActivity" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@id/textViewDebitCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d8d8d8"
+            android:text="DEBIT CARD"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textViewDebitCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading Debit Card..." />
+
+        <TextView
+            android:id="@id/textViewYourInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d8d8d8"
+            android:text="YOUR INFO"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textViewPhoneOrEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading Phone or Email..." />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <Button
+            android:id="@+id/buttonback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00c90e"
+            android:text="BACK"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/buttonlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:text="LOGOUT"
+            android:textColor="#00c90e" />
+
+    </LinearLayout>
+
+</RelativeLayout>

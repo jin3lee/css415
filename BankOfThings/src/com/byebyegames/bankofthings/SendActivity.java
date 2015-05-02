@@ -1,105 +1,88 @@
 package com.byebyegames.bankofthings;
 
-import java.util.Random;
-
 import android.support.v7.app.ActionBarActivity;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class SendActivity extends ActionBarActivity {
-	Button button_review = null;
-	RadioButton radio_goodOrServ = null;
-	RadioButton radio_friendsOrFam = null;
-	EditText et_to = null;
-	EditText et_amount = null;
-	EditText et_message = null;
+
+	Button[] button_numbers;
 	
-	TextView funds = null;
+	Button button_period, button_del, button_send,
+		button_settings, button_history;
+	EditText editText_Dollars;
 	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	@SuppressLint("NewApi")
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_send);
+		
+		// initialize button array
+		button_numbers = new Button[10];
+		
+		// leash all buttons
+		button_numbers[0] = (Button) findViewById(R.id.button0);
+		button_numbers[1] = (Button) findViewById(R.id.button1);
+		button_numbers[2] = (Button) findViewById(R.id.button2);
+		button_numbers[3] = (Button) findViewById(R.id.button3);
+		button_numbers[4] = (Button) findViewById(R.id.button4);
+		button_numbers[5] = (Button) findViewById(R.id.button5);
+		button_numbers[6] = (Button) findViewById(R.id.button6);
+		button_numbers[7] = (Button) findViewById(R.id.button7);
+		button_numbers[8] = (Button) findViewById(R.id.button8);
+		button_numbers[9] = (Button) findViewById(R.id.button9);
 
-		// sets background color to white
-		setActivityBackgroundColor(Color.WHITE);
+		button_send = (Button) findViewById(R.id.buttonsend);
+		button_send.setClickable(false);
+		
+		button_history = (Button) findViewById(R.id.buttonhistory);
+		button_settings = (Button) findViewById(R.id.buttonsettings);
+		button_period = (Button) findViewById(R.id.buttonperiod);
+		button_del = (Button) findViewById(R.id.buttondel);
+		
+		// leash text view
+		editText_Dollars= (EditText) findViewById(R.id.editViewDollars);
+		editText_Dollars.setText("$0");
+		
+		// initialize button on click methods
+		initializeButtons();
+		button_send.setClickable(false);
+		
 
-		// leashes to radio buttons
-		radio_friendsOrFam = (RadioButton)findViewById(R.id.radioButton1);
-		radio_goodOrServ = (RadioButton)findViewById(R.id.radioButton2);
-		button_review = (Button)findViewById(R.id.button1);
-		et_to = (EditText)findViewById(R.id.editText0);
-		et_amount = (EditText)findViewById(R.id.editText1);
-		et_message = (EditText)findViewById(R.id.editText2);
-		funds = (TextView)findViewById(R.id.textView2);
-		
-		//TODO: update funds
-		Random r = new Random();
-		funds.setText("Available Funds: $" + (int)(r.nextInt(100)) + ".00");
-		funds.setTextColor(Color.BLACK);
-		// sets review button
-		button_review.setBackgroundColor(Color.parseColor("#B2ECFF"));
-		button_review.setTextColor(Color.parseColor("White"));
-		
-		// sets button to unactive by default
-		button_review.setClickable(false);
-		
-		radio_friendsOrFam.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                //handle the boolean flag here. 
-                  if(arg1==true){
-                	  if(radio_goodOrServ.isChecked()) {
-                		  radio_goodOrServ.setChecked(false);
-                	  }
-                  }
-
-        		  button_review.setClickable(isReadyForReview(radio_friendsOrFam, 
-        				  radio_goodOrServ, button_review));
-            }
-        });
-		
-		radio_goodOrServ.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                //handle the boolean flag here. 
-                  if(arg1==true){
-                	  if(radio_friendsOrFam.isChecked()) {
-                		  radio_friendsOrFam.setChecked(false);
-                	  }
-                  }
-        		  button_review.setClickable(isReadyForReview(radio_friendsOrFam, 
-        				  radio_goodOrServ, button_review));
-            }
-        });
+        Log.d("JDT","PHONE OR EMAIL: "+getIntent().getExtras().getString("PHONEOREMAIL"));
+        Log.d("JDT","DEBIT CARD: "+getIntent().getExtras().getString("DEBITCARDNUMBER"));
 	}
 
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
+	public void onResume()
 	{
+		super.onResume();
+		if(editText_Dollars.getText().toString().equals("$0"))
+			button_send.setClickable(false);
+		else
+			button_send.setClickable(true);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.registration, menu);
 		return true;
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) 
-	{
+	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
@@ -109,33 +92,160 @@ public class SendActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	public void initializeButtons()
+	{
+		button_numbers[0].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(0);
 
-	// changes background color of activity
-	public void setActivityBackgroundColor(int color) {
-		View view = this.getWindow().getDecorView();
-		view.setBackgroundColor(color);
+				button_send.setClickable(false);
+			}
+		});
+		button_numbers[1].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(1);
+			}
+		});
+		button_numbers[2].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(2);
+			}
+		});
+		button_numbers[3].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(3);
+			}
+		});
+		button_numbers[4].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(4);
+			}
+		});
+		button_numbers[5].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(5);
+			}
+		});
+		button_numbers[6].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(6);
+			}
+		});
+		button_numbers[7].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(7);
+			}
+		});
+		button_numbers[8].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(8);
+			}
+		});
+		button_numbers[9].setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				initializeHelper(9);
+			}
+		});
+		button_del.setOnClickListener(new View.OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				int length = editText_Dollars.getText().length();
+				if(length > 1 && editText_Dollars.getText().charAt(1) != '0')
+					editText_Dollars.setText(editText_Dollars.getText().subSequence(0, length-1));
+				length = editText_Dollars.getText().length();
+				if(length == 1)
+				{
+					editText_Dollars.setText("$0");
+					button_send.setClickable(false);
+				}
+			}
+		});
+		button_period.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				editText_Dollars.setText(editText_Dollars.getText() + ".");
+			}
+		});
+		button_send.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), ToActivity.class);
+				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
+				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
+				i.putExtra("AMOUNT", editText_Dollars.getText());
+                startActivity(i);
+			}
+		});
+		button_settings.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), SettingActivity.class);
+				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
+				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
+                startActivityForResult(i,6);
+			}
+		});
+		button_history.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
+				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
+				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
+				startActivityForResult(i,4);
+			}
+		});
 	}
 	
-	public boolean isReadyForReview(RadioButton arg0, RadioButton arg1, Button reviewButton)
+	public void initializeHelper(int number)
 	{
-		boolean retVal = false;
-		
-		// tests for review
-		if((arg0.isChecked() 
-				|| arg1.isChecked()))
+		if(editText_Dollars.getText().toString().equals("$0"))
 		{
-			retVal = true;
-		}
-		
-		// changes button color
-		if(retVal)
-		{
-			reviewButton.setBackgroundColor(Color.parseColor("#00BFFF"));
-			reviewButton.setTextColor(Color.parseColor("White"));
+			editText_Dollars.setText("$"+ Integer.toString(number));
 		}else{
-			reviewButton.setBackgroundColor(Color.parseColor("#B2ECFF"));
-			reviewButton.setTextColor(Color.parseColor("White"));
+			editText_Dollars.setText(editText_Dollars.getText() + Integer.toString(number));
 		}
-		return retVal;
+		
+		button_send.setClickable(true);
 	}
 }

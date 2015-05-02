@@ -10,5 +10,12 @@
     <string name="signup">New to BankOfThings? Sign Up</string>
     <string name="title_activity_history">History</string>
     <string name="title_activity_send">Send</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_linking">Linking</string>
+    <string name="title_activity_to">To</string>
+    <string name="title_activity_setting">Setting</string>
+    <string name="title_activity_confirmation">Confirmation</string>
+    <string name="title_activity_sent">Sent</string>
+    <string name= "preference_file_key">com.byebyegames.bankofthings</string>
 
 </resources>

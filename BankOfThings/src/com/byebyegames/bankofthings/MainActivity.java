@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
 		setActivityBackgroundColor(Color.WHITE);
 
 		// leashes to textview that says "New to BankOfThings? Sign Up"
-		Button textLink_signup = (Button) findViewById(R.id.button2);
+		Button textLink_signup = (Button) findViewById(R.id.buttonback);
 		textLink_signup.setTextColor(Color.parseColor("#0080FF"));
 		textLink_signup.setBackgroundColor(Color.parseColor("WHITE"));
 		textLink_signup.setOnClickListener(new View.OnClickListener() 	// goes to signup website
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 		});
 
 		// leashes to login button 
-		Button button_login = (Button) findViewById(R.id.button1);		// leash to specified xml button
+		Button button_login = (Button) findViewById(R.id.buttonsend);		// leash to specified xml button
 		button_login.setBackgroundColor(Color.parseColor("#00BFFF"));	// button color blue
 		button_login.setTextColor(Color.parseColor("WHITE"));			// text color white
 		
@@ -50,12 +50,12 @@ public class MainActivity extends ActionBarActivity {
 		button_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	// leash to text view
-                TextView debugDisplay = (TextView) findViewById(R.id.textView2);
+                TextView debugDisplay = (TextView) findViewById(R.id.textViewDollars);
                 
                 // declare temp variables
                 String loginID = "";
                 String password = "";
-                EditText editText_email = (EditText) findViewById(R.id.editText1);
+                EditText editText_email = (EditText) findViewById(R.id.editTextto);
                 EditText editText_password = (EditText) findViewById(R.id.editText2);
                 
                 // initialize temp variables
