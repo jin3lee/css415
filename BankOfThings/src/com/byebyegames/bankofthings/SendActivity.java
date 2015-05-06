@@ -3,6 +3,7 @@ package com.byebyegames.bankofthings;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,7 @@ public class SendActivity extends ActionBarActivity {
 	
 	Button button_period, button_del, button_send,
 		button_settings, button_history;
-	EditText editText_Dollars;
+	TextView tv_Dollars;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +52,13 @@ public class SendActivity extends ActionBarActivity {
 		button_del = (Button) findViewById(R.id.buttondel);
 		
 		// leash text view
-		editText_Dollars= (EditText) findViewById(R.id.editViewDollars);
-		editText_Dollars.setText("$0");
+		tv_Dollars= (TextView) findViewById(R.id.textViewDollars);
+		tv_Dollars.setText("$0");
 		
 		// initialize button on click methods
 		initializeButtons();
 		button_send.setClickable(false);
 		
-
-        Log.d("JDT","PHONE OR EMAIL: "+getIntent().getExtras().getString("PHONEOREMAIL"));
-        Log.d("JDT","DEBIT CARD: "+getIntent().getExtras().getString("DEBITCARDNUMBER"));
 	}
 
 	
@@ -68,7 +66,7 @@ public class SendActivity extends ActionBarActivity {
 	public void onResume()
 	{
 		super.onResume();
-		if(editText_Dollars.getText().toString().equals("$0"))
+		if(tv_Dollars.getText().toString().equals("$0"))
 			button_send.setClickable(false);
 		else
 			button_send.setClickable(true);
@@ -101,8 +99,6 @@ public class SendActivity extends ActionBarActivity {
 			public void onClick(View v) 
 			{
 				initializeHelper(0);
-
-				button_send.setClickable(false);
 			}
 		});
 		button_numbers[1].setOnClickListener(new View.OnClickListener() 
@@ -182,13 +178,16 @@ public class SendActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) 
 			{
-				int length = editText_Dollars.getText().length();
-				if(length > 1 && editText_Dollars.getText().charAt(1) != '0')
-					editText_Dollars.setText(editText_Dollars.getText().subSequence(0, length-1));
-				length = editText_Dollars.getText().length();
+				int length = tv_Dollars.getText().length();
+				if(length > 1)
+				{
+					tv_Dollars.setText(tv_Dollars.getText().subSequence(0, length-1));
+				}
+				
+				length = tv_Dollars.getText().length();
 				if(length == 1)
 				{
-					editText_Dollars.setText("$0");
+					tv_Dollars.setText("$0");
 					button_send.setClickable(false);
 				}
 			}
@@ -197,8 +196,20 @@ public class SendActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				boolean hasPeriod = false;
 				// TODO Auto-generated method stub
-				editText_Dollars.setText(editText_Dollars.getText() + ".");
+				for(int i = 0; i < tv_Dollars.getText().toString().length(); i++)
+				{
+					if(tv_Dollars.getText().toString().charAt(i) == '.') 
+					{
+						hasPeriod = true;
+					}
+				}
+				
+				if(!hasPeriod)
+				{
+					tv_Dollars.setText(tv_Dollars.getText() + ".");	
+				}
 			}
 		});
 		button_send.setOnClickListener(new View.OnClickListener() {
@@ -206,10 +217,28 @@ public class SendActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				switch(getCountOfCharactersAfterPeriod())
+				{
+				case -1:
+					tv_Dollars.setText(tv_Dollars.getText() + ".00");	
+					break;
+				case 0:
+					tv_Dollars.setText(tv_Dollars.getText() + "00");	
+					break;
+				case 1:
+					tv_Dollars.setText(tv_Dollars.getText() + "0");	
+					break;
+				default:
+						break;
+				}
+				
+				SharedPreferences sp = getSharedPreferences("bankofdata",Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sp.edit();
+				editor.putString("sendingAmount", ""+tv_Dollars.getText().toString());
+				editor.putBoolean("pending", true);
+				editor.commit();
+				
 				Intent i = new Intent(getApplicationContext(), ToActivity.class);
-				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
-				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
-				i.putExtra("AMOUNT", editText_Dollars.getText());
                 startActivity(i);
 			}
 		});
@@ -219,8 +248,6 @@ public class SendActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(getApplicationContext(), SettingActivity.class);
-				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
-				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
                 startActivityForResult(i,6);
 			}
 		});
@@ -230,8 +257,6 @@ public class SendActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
-				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
-				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
 				startActivityForResult(i,4);
 			}
 		});
@@ -239,13 +264,51 @@ public class SendActivity extends ActionBarActivity {
 	
 	public void initializeHelper(int number)
 	{
-		if(editText_Dollars.getText().toString().equals("$0"))
+		if(tv_Dollars.getText().toString().equals("$0"))
 		{
-			editText_Dollars.setText("$"+ Integer.toString(number));
-		}else{
-			editText_Dollars.setText(editText_Dollars.getText() + Integer.toString(number));
+			tv_Dollars.setText("$"+ Integer.toString(number));
+		}
+		else if(getCountOfCharactersAfterPeriod() > 2)
+		{
+			// do not enter a number after two decimals
+		}
+		else if(getCountOfCharactersAfterPeriod() == -1)
+		{
+			// caps the amount possible to send to 7 digits, excluding cents
+			if(!(tv_Dollars.getText().toString().length() > 7))
+			{
+				tv_Dollars.setText(tv_Dollars.getText() + Integer.toString(number));
+			}
+		}
+		else 
+		{
+			tv_Dollars.setText(tv_Dollars.getText() + Integer.toString(number));
 		}
 		
 		button_send.setClickable(true);
+	}
+	
+	// returns amount of characters after the period
+	public int getCountOfCharactersAfterPeriod()
+	{
+		int retVal = -1;	// -1 = no period | any other number represents how many characters are after the period
+		int locationOfPeriod = -1;
+		boolean hasPeriod = false;
+		
+		for(int i = 0; i < tv_Dollars.getText().toString().length(); i++)
+		{
+			if(tv_Dollars.getText().toString().charAt(i) == '.')
+			{
+				locationOfPeriod = i;
+				hasPeriod = true;
+			}
+		}
+		
+		if(hasPeriod)
+		{
+			retVal = tv_Dollars.getText().toString().length() - locationOfPeriod;
+		}
+		
+		return retVal;
 	}
 }

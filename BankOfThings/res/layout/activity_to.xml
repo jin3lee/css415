@@ -17,6 +17,16 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/textViewAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00c90e"
+            android:ems="10"
+            android:text="Loading Amount..."
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -26,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="To:"
+                android:text="To: "
                 android:textColor="#00c90e" />
 
             <EditText
@@ -35,10 +45,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Email@gmail.com, contacts" >
+                android:hint="Username" >
 
                 <requestFocus />
             </EditText>
+
         </LinearLayout>
 
         <LinearLayout
@@ -62,6 +73,15 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/textViewError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fill &quot;To&quot; and &quot;For&quot; fields to continue."
+            android:textColor="#FF0000" 
+            android:gravity="center"
+            />
+
+        <TextView
             android:id="@+id/textViewContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,8 +93,8 @@
         <ListView
             android:id="@+id/listViewContacts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.73" />
+            android:layout_height="224dp"
+            android:layout_weight="3.77" />
 
         <LinearLayout
             android:layout_width="match_parent"

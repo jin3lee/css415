@@ -23,8 +23,8 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/editViewDollars"
+        <TextView
+            android:id="@+id/textViewDollars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -163,7 +163,8 @@
                 android:layout_height="wrap_content"
                 android:background="#00c90e"
                 android:text="."
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/button0"

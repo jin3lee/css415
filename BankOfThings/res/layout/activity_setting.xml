@@ -32,7 +32,7 @@
             android:text="Loading Debit Card..." />
 
         <TextView
-            android:id="@id/textViewYourInfo"
+            android:id="@+id/textViewYourInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#d8d8d8"
@@ -43,7 +43,7 @@
             android:id="@+id/textViewPhoneOrEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loading Phone or Email..." />
+            android:text="Loading Username..." />
 
     </LinearLayout>
 

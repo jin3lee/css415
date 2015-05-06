@@ -3,6 +3,7 @@ package com.byebyegames.bankofthings;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
@@ -18,18 +19,19 @@ import android.widget.TextView;
 public class LinkingActivity extends ActionBarActivity {
 
 	Button[] button_numbers;
-	
+
 	Button button_abc, button_del, button_next, button_skip;
 	EditText tv_debitCardNumber;
-	
+	TextView tv_error;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_linking);
-		
+
 		// initialize button array
 		button_numbers = new Button[10];
-		
+
 		// leash all buttons
 		button_numbers[0] = (Button) findViewById(R.id.button0);
 		button_numbers[1] = (Button) findViewById(R.id.button1);
@@ -46,9 +48,11 @@ public class LinkingActivity extends ActionBarActivity {
 		button_skip = (Button) findViewById(R.id.buttonskip);
 		button_abc = (Button) findViewById(R.id.buttonabc);
 		button_del = (Button) findViewById(R.id.buttondel);
-		
+
 		// leash text view
 		tv_debitCardNumber = (EditText) findViewById(R.id.textViewDollars);
+		tv_error = (TextView) findViewById(R.id.textViewError);
+		tv_error.setVisibility(tv_error.INVISIBLE);
 		
 		// initialize button on click methods
 		initializeButtons();
@@ -72,7 +76,7 @@ public class LinkingActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void initializeButtons()
 	{
 		button_numbers[0].setOnClickListener(new View.OnClickListener() 
@@ -167,25 +171,40 @@ public class LinkingActivity extends ActionBarActivity {
 		});
 		button_abc.setClickable(false);
 		button_next.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), SendActivity.class);
-				i.putExtra("DEBITCARDNUMBER", ""+tv_debitCardNumber.getText().toString());
-				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
-                startActivity(i);
+
+				if(tv_debitCardNumber.getText().toString().length() != 16)
+				{
+					tv_error.setVisibility(tv_error.VISIBLE);
+				}	
+				else
+				{
+					// TODO Auto-generated method stub
+					SharedPreferences sp = getSharedPreferences("bankofdata",Context.MODE_PRIVATE);
+					SharedPreferences.Editor editor = sp.edit();
+					
+					// stores username
+					// stores it in server but for now in shared preference
+					editor.putString("cardNumber", tv_debitCardNumber.getText().toString());
+					editor.commit();
+					
+					Intent i = new Intent(getApplicationContext(), RegistrationSuccessActivity.class);
+					startActivity(i);
+				}
+
 			}
+
+
 		});
 		button_skip.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), SendActivity.class);
-				i.putExtra("DEBITCARDNUMBER", ""+tv_debitCardNumber.getText().toString());
-				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
-                startActivity(i);
+				Intent i = new Intent(getApplicationContext(), RegistrationSuccessActivity.class);
+				startActivity(i);
 			}
 		});
 	}

@@ -1,16 +1,22 @@
 package com.byebyegames.bankofthings;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ConfirmationActivity extends ActionBarActivity {
 
 	Button button_back, button_cancel, button_send;
+	TextView tv_receipt;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,20 +26,21 @@ public class ConfirmationActivity extends ActionBarActivity {
 		button_cancel = (Button) findViewById(R.id.buttoncancel);
 		button_send = (Button) findViewById(R.id.buttonsend);
 
-		button_send.setText("\nTo: " + getIntent().getExtras().getString("TO") 
-				+ "\nFor: " + getIntent().getExtras().getString("FOR")
-				+ "\nAmount: " + getIntent().getExtras().getString("AMOUNT")
-				+"\n\n PRESS HERE TO SEND!");
-		button_send.setOnClickListener(new View.OnClickListener() {
+		tv_receipt = (TextView) findViewById(R.id.textViewReceipt);
 
+		SharedPreferences sp = getSharedPreferences("bankofdata", Context.MODE_PRIVATE);
+		
+		tv_receipt.setText("\n                  To:    " + sp.getString("to", "Professor Jeffrey Kim")
+				+ "\n                 For:    " + sp.getString("for", "Teaching Us Hacking")
+				+ "\n        Amount:    " + sp.getString("sendingAmount", "1,000,000.00"));
+		Log.d("JDT","TESTS!");
+		
+		button_send.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(getApplicationContext(), SentActivity.class);
-				i.putExtra("DEBITCARDNUMBER", ""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
-				i.putExtra("PHONEOREMAIL", ""+getIntent().getExtras().getString("PHONEOREMAIL"));
-				i.putExtra("AMOUNT", getIntent().getExtras().getString("AMOUNT"));
-                startActivityForResult(i, 8);
+                startActivity(i);
 			}
 		});
 		button_back.setOnClickListener(new View.OnClickListener() {

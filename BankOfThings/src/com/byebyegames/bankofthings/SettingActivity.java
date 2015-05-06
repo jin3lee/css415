@@ -1,7 +1,9 @@
 package com.byebyegames.bankofthings;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,7 +28,6 @@ public class SettingActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) 
 			{
-				Log.d("JDT", "finish activity 6");
 				System.exit(0);
 			}
 		});
@@ -38,9 +39,6 @@ public class SettingActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) 
 			{
-				Log.d("JDT", "Killing activity");
-//				android.os.Process.killProcess(android.os.Process.myPid());
-//				System.exit(0);
 				finish();
 			}
 		});
@@ -48,8 +46,22 @@ public class SettingActivity extends ActionBarActivity {
 		tv_phoneOrEmail = (TextView) findViewById(R.id.textViewPhoneOrEmail);
 		tv_debitCardNumber = (TextView) findViewById(R.id.textViewDebitCardNumber);
 		
-		tv_debitCardNumber.setText(""+getIntent().getExtras().getString("DEBITCARDNUMBER"));
-		tv_phoneOrEmail.setText(""+getIntent().getExtras().getString("PHONEOREMAIL"));
+		SharedPreferences sp = getSharedPreferences("bankofdata",Context.MODE_PRIVATE);
+		
+		if(sp.getString("username", "no username found") != "no username found")
+		{
+			tv_phoneOrEmail.setText("Username: " + sp.getString("username", "no username found"));	
+		}
+		
+		if(sp.getString("cardNumber", "-1") == "-1")
+		{
+			tv_debitCardNumber.setText("Not Linked Yet");
+		}
+		else
+		{
+			tv_debitCardNumber.setText("************" + sp.getString("cardNumber", "no cardnumber found").substring(12));	
+		}
+		
 	}
 
 	@Override

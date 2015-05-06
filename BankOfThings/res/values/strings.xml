@@ -16,6 +16,9 @@
     <string name="title_activity_setting">Setting</string>
     <string name="title_activity_confirmation">Confirmation</string>
     <string name="title_activity_sent">Sent</string>
-    <string name= "preference_file_key">com.byebyegames.bankofthings</string>
+    <string name="preference_file_key">com.byebyegames.bankofthings</string>
+    <string name="title_activity_password">PasswordActivity</string>
+    <string name="title_activity_registration_success">RegistrationSuccessActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>

@@ -24,22 +24,24 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textViewDebitCard"
+            android:id="@+id/textViewWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Welcome to Bank Of Things!\nEnter your email to continue."
-            android:textColor="#FFFFFF" />
+            android:text="Welcome to Bank Of Things!\nRegister a username to continue."
+            android:textColor="#FFFFFF"
+            android:textSize="16dp" />
 
         <EditText
-            android:id="@+id/textViewDollars"
+            android:id="@+id/editTextUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
             android:gravity="center"
-            android:hint="Phone or Email"
+            android:hint="Username"
             android:lines="1"
+            android:maxLines="1"
             android:textColor="#FFFFFF"
             android:textColorHint="#bdffb3"
             android:textSize="30dp" />
@@ -49,157 +51,23 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" >
-
-            <Button
-                android:id="@+id/button1"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="1"
-                android:textColor="#FFFFFF"
-                android:textSize="25sp" />
-
-            <Button
-                android:id="@+id/button2"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="2"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-            <Button
-                android:id="@+id/button3"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="3"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" >
-
-            <Button
-                android:id="@+id/button4"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="4"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-            <Button
-                android:id="@+id/button5"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="5"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-            <Button
-                android:id="@+id/button6"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="6"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" >
-
-            <Button
-                android:id="@+id/button7"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="7"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-            <Button
-                android:id="@+id/button8"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="8"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-            <Button
-                android:id="@+id/button9"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="9"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" >
-
-            <Button
-                android:id="@+id/buttonabc"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="ABC"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/button0"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="25dp" />
-
-            <Button
-                android:id="@+id/buttondel"
-                style="@style/AppBaseTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00c90e"
-                android:text="DEL"
-                android:textColor="#FFFFFF" />
-
-        </LinearLayout>
-
 
     <android.support.v7.widget.Space
         android:id="@+id/space2"
         android:layout_width="wrap_content"
         android:layout_height= "40dp" />
+
+    <TextView
+        android:id="@+id/textViewErrorEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:text="Please enter a username to continue."
+        android:textColor="#FF0000" >
+
+        <requestFocus />
+    </TextView>
 
     </LinearLayout>
 

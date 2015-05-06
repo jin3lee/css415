@@ -29,6 +29,14 @@
             android:text="Add a bank by entering a Visa\nor Mastercard debit card."
             android:textColor="#FFFFFF" />
 
+        <TextView
+            android:id="@+id/textViewError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please Enter a valid 16 digit card number to continue"
+            android:textColor="#ff0000" />
+
         <EditText
             android:id="@+id/textViewDollars"
             android:layout_width="wrap_content"

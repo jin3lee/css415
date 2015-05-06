@@ -23,11 +23,11 @@
             android:layout_height="wrap_content"
             android:background="#e5e5e5"
             android:ems="10"
-            android:text="RECIEVED"
+            android:text="Make Money!"
             android:textColor="#9a9a9a" />
 
         <ListView
-            android:id="@+id/listViewContacts"
+            android:id="@+id/listViewHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.73" />
