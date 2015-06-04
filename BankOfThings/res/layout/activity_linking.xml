@@ -213,16 +213,6 @@
         android:layout_alignParentBottom="true" >
 
         <Button
-            android:id="@+id/buttonskip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.37"
-            android:background="#FFFFFF"
-            android:outlineProvider="background"
-            android:text="SKIP"
-            android:textColor="#00c90e" />
-
-        <Button
             android:id="@+id/buttonnext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

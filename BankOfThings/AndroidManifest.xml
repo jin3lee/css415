@@ -9,6 +9,7 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -63,6 +64,10 @@
         <activity
             android:name=".RegistrationSuccessActivity"
             android:label="@string/title_activity_registration_success" >
+        </activity>
+        <activity
+            android:name=".RegistrationFailedActivity"
+            android:label="@string/title_activity_registration_failed" >
         </activity>
         <activity
             android:name=".LoginActivity"

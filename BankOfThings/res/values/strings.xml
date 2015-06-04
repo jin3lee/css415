@@ -19,6 +19,7 @@
     <string name="preference_file_key">com.byebyegames.bankofthings</string>
     <string name="title_activity_password">PasswordActivity</string>
     <string name="title_activity_registration_success">RegistrationSuccessActivity</string>
+    <string name="title_activity_registration_failed">RegistrationFailedActivity</string>
     <string name="title_activity_login">LoginActivity</string>
 
 </resources>
